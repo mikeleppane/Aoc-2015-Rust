@@ -41,7 +41,7 @@ impl<T: FromStr> FromStr for Point<T> {
     type Err = String;
 
     fn from_str(p: &str) -> Result<Self, Self::Err> {
-        let (x, y) = p.split_once(", ").ok_or("input file corrupt")?;
+        let (x, y) = p.split_once(',').ok_or("input file corrupt")?;
         let (x, y) = (x.trim(), y.trim());
 
         Ok(Self {
