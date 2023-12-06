@@ -15,7 +15,7 @@ impl Day06 {
 
 impl Runner for Day06 {
     fn name(&self) -> (usize, usize) {
-        (2015, 5)
+        (2015, 6)
     }
 
     fn parse(&mut self, input: Option<&str>) {
