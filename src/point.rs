@@ -15,6 +15,40 @@ impl<T> Point<T> {
     pub fn new(x: T, y: T) -> Self {
         Self { x, y }
     }
+
+    pub fn neighbors(&self) -> Vec<Self>
+    where
+        T: Copy + Add<T, Output = T> + Sub<T, Output = T> + From<i8>,
+    {
+        let mut neighbors = Vec::new();
+        for x in -1..=1 {
+            for y in -1..=1 {
+                if x == 0 && y == 0 {
+                    continue;
+                }
+                neighbors.push(Self {
+                    x: self.x + T::from(x),
+                    y: self.y + T::from(y),
+                });
+            }
+        }
+        neighbors
+    }
+
+    pub fn neighbors_without_diagonals(&self) -> Vec<Self>
+    where
+        T: Copy + Add<T, Output = T> + Sub<T, Output = T> + From<i8>,
+    {
+        let mut neighbors = Vec::new();
+        let neighbor_indices = [(-1, 0), (0, -1), (1, 0), (0, 1)];
+        for (x, y) in neighbor_indices.iter() {
+            neighbors.push(Self {
+                x: self.x + T::from(*x),
+                y: self.y + T::from(*y),
+            });
+        }
+        neighbors
+    }
 }
 
 impl<T: AddAssign> AddAssign for Point<T> {
